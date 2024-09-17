@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'common/page_title.html' with title='Checkout Completed' %}
+
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center">
+                <i class="lni lni-checkmark-circle text-muted display-1"></i>
+            </h1>
+            <p class="text-center mt-4">
+               Your purchase was successful. You will receive an email containing links
+                to download the books you ordered!
+            </p>
+            <p class="text-center">
+                <a href="/" class="btn btn-primary">Return to Homepage</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

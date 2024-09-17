@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-y8*!pnmgaj#$hbg&y$5f3fj3)i+)8h))pdg@ign^o5=_ltud8m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'cover-to-cover.com',
+    '127.0.0.1',
+    'localhost'
+]
 
 
 # Application definition
@@ -37,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'store',
     'checkout',
+    'reports',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'CoverToCover.urls'
@@ -64,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.custom_context_processor.web_store'
             ],
         },
     },
@@ -77,8 +85,12 @@ WSGI_APPLICATION = 'CoverToCover.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cover-to-cover',
+        'USER': 'postgres',
+        'PASSWORD': '100200300',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
@@ -111,15 +123,44 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+
+
+
+
 USE_TZ = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'c4d3c10ebf4e51'
+EMAIL_HOST_PASSWORD = '660102c8f530db'
+EMAIL_PORT = '587'
+
+SITE_URL = 'http://127.0.0.1:8000/'
+
+STRIPE_PUBLISHABLE_KEY='pk_test_51PYIX7EWDCQKaTF393X4xIUfJweeFWWdfizIL2p8i7p4vKY8sM2Fet4I0qvt2xwRMmIShiFTgLS3DlvZ76oZ72VF000rVsr6Hh'
+STRIPE_SECRET_KEY = 'sk_test_51PYIX7EWDCQKaTF3nwJL3I0jkLXgjKEUcHlCCUs4KCaCHu16fhDsPanWKgoCptG5GBDEnQFHB6b9B3KUjUjA3mwB00BNA4Pcp8'
+STRIPE_ENDPOINT_SECRET = 'whsec_3fc7f219acaf7a8e1aa108d64e8dea5918f133a3cbaed6f2a8442926d6ef9409'
+
+PAYPAL_TEST = True
+PAYPAL_EMAIL = 'sb-ep8js32684856@business.example.com'
+
+
+
+CURRENCY ='USD'

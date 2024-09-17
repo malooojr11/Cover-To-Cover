@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load my_filters %}
+{% block content %}  
+  <!-- Slider main container -->
+  {% include "parts/slider.html" with slide=slide %}
+
+  <!-- Main container -->
+<div class="container my-5">
+  <section>
+    <div class="col-md-12 mb-5">
+      <p class="h1 text-center text-secondary">Featured books</p>
+    </div>
+    <div class="row">
+      {% for product in products %}
+        {% include 'common/product_card.html' with product=product %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% endblock %}
