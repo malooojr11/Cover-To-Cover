@@ -5,9 +5,7 @@
 
 ## Features
 - **Book Listings**: View and search for books by category, author, or title.
-- **User Accounts**: Register, log in, and manage user profiles.
 - **Shopping Cart**: Add books to the cart, view cart contents, and proceed to checkout.
-- **Order Management**: Complete purchases and view order history.
 
 ## Installation
 
