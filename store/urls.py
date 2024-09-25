@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import index, product, category, cart, checkout, checkout_complete, cart_update, cart_remove
+from django.conf.urls.static import static
+from CoverToCover import settings
 
 urlpatterns = [
     path('', index, name='store.home'),
@@ -12,4 +14,4 @@ urlpatterns = [
     path('checkout/', checkout, name='store.checkout'),
     path('checkout/complete/', checkout_complete, name='store.checkout_complete'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
